@@ -29,6 +29,6 @@ app.post('/', function(req, res){
 
 var server = app.listen(8001, function(){
     var host = server.address().address;
-    var post = server.address().port;
+    var port = server.address().port;
     console.log('auto-deploy项目自动更新服务：http://%s:%s', host, port)
 })
