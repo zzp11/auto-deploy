@@ -19,8 +19,8 @@ app.all('/', function(req, res){
     run_cmd("bash", ["deploy.sh"], function(resp){
         console.log(resp);
     });
-    console.log(req.body.read);
     res.send('ok');
+    console.log(req.body.read);
 })
 
 var server = app.listen(8001, "0.0.0.0", function(){
