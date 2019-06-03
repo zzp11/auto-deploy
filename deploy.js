@@ -15,16 +15,38 @@ function run_cmd(cmd, args, callback){
     })
 }
 
+function update_reposity(){
+    return new Promise(function(resolve, reject){
+        run_cmd("git", ["pull"], function(resp){
+            resolve(resp);
+        })
+    })
+}
+
+function restart_server(){
+    return new Promise(function(resolve, reject){
+        run_cmd("pm2", ["restart", "auto-deploy"], function(resp){
+            resolve(resp);
+        })
+    })
+} 
+
 app.get('/hello', function(req, res){
     res.send("hello")
 })
 
-app.all('/', function(req, res){
-    run_cmd("bash", ["deploy.sh"], function(resp){
-        console.log(resp);
-        res.send(resp);
-    });
-    console.log(req.body.read);
+app.all('/', async function(req, res){
+    var resp = "";
+    if(req.body){
+        resp = req.body.read;
+    }
+
+    resp = resp + '\r\n' + await update_reposity();
+    console.log(resp);
+    res.send(resp); // return to github, will show in "Recent Deliveries"
+
+    resp = await restart_server();
+    console.log(resp);
 })
 
 var server = app.listen(8001, "0.0.0.0", function(){
