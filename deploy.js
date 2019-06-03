@@ -16,10 +16,10 @@ function run_cmd(cmd, args, callback){
 }
 
 app.all('/', function(req, res){
-    console.log(req.body.read);
     run_cmd("bash", ["depoly.sh"], function(resp){
         console.log(resp);
-    })
+    });
+    console.log(req.body.read);
     res.send('ok');
 })
 
