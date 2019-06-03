@@ -15,6 +15,10 @@ function run_cmd(cmd, args, callback){
     })
 }
 
+app.get('/hello', function(req, res){
+    res.send("hello")
+})
+
 app.all('/', function(req, res){
     run_cmd("bash", ["deploy.sh"], function(resp){
         console.log(resp);
