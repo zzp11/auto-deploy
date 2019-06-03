@@ -17,7 +17,7 @@ function run_cmd(cmd, args, callback){
 
 function update_reposity(){
     return new Promise(function(resolve, reject){
-        run_cmd("git", ["pull"], function(resp){
+        run_cmd("git", ["pull"], function(resp){ //根据需要自动部署的项目修改改命令，最好写到一个脚本里
             resolve(resp);
         })
     })
@@ -25,7 +25,7 @@ function update_reposity(){
 
 function restart_server(){
     return new Promise(function(resolve, reject){
-        run_cmd("pm2", ["restart", "auto-deploy"], function(resp){
+        run_cmd("pm2", ["restart", "auto-deploy"], function(resp){ //重启项目命令，根据实际情况修改，最好写到一个脚本里
             resolve(resp);
         })
     })
@@ -43,7 +43,7 @@ app.all('/', async function(req, res){
 
     resp = resp + '\r\n' + await update_reposity();
     console.log(resp);
-    res.send(resp); // return to github, will show in "Recent Deliveries"
+    res.send(resp); // 返回到github，可以在"Recent Deliveries"里查看
 
     resp = await restart_server();
     console.log(resp);
