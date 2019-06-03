@@ -1,5 +1,5 @@
 
-var spawn = require('child_process').spawn;
+var spwan = require('child_process').spawn;
 var express = require('express');
 var app = express();
 
@@ -15,11 +15,7 @@ function run_cmd(cmd, args, callback){
     })
 }
 
-app.get('/', function(req, res){
-    res.send('auto-deploy')
-})
-
-app.post('/', function(req, res){
+app.all('/', function(req, res){
     console.log(req);
     run_cmd("bash", ["./depoly.sh"], function(resp){
         console.log(resp);
@@ -27,7 +23,7 @@ app.post('/', function(req, res){
     res.send('ok');
 })
 
-var server = app.listen(8001, function(){
+var server = app.listen(8001, "0.0.0.0", function(){
     var host = server.address().address;
     var port = server.address().port;
     console.log('auto-deploy项目自动更新服务：http://%s:%s', host, port)
