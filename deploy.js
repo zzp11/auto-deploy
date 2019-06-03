@@ -15,6 +15,10 @@ function run_cmd(cmd, args, callback){
     })
 }
 
+app.get('/', function(req, res){
+    res.send('auto-deploy')
+})
+
 app.post('/', function(req, res){
     console.log(req);
     run_cmd("bash", ["./depoly.sh"], function(resp){
