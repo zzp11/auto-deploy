@@ -22,8 +22,8 @@ app.get('/hello', function(req, res){
 app.all('/', function(req, res){
     run_cmd("bash", ["deploy.sh"], function(resp){
         console.log(resp);
+        res.send(resp);
     });
-    res.send('ok');
     console.log(req.body.read);
 })
 
