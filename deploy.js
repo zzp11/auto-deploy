@@ -17,7 +17,7 @@ function run_cmd(cmd, args, callback){
 
 app.all('/', function(req, res){
     console.log(req);
-    run_cmd("bash", ["./depoly.sh"], function(resp){
+    run_cmd("bash", ["depoly.sh"], function(resp){
         console.log(resp);
     })
     res.send('ok');
