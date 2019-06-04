@@ -33,4 +33,5 @@ RUN ln -s /usr/lib/node/bin/pm2 /usr/bin
 # ENTRYPOINT cd /home/auto-deploy && pm2 start pm2.json && pm2 log
 # ENTRYPOINT cd /home/auto-deploy && pm2 start pm2.json && tail /dev/null
 ENTRYPOINT cd /home/auto-deploy && pm2 start pm2.json && /bin/bash
+# CMD cd /home/auto-deploy && pm2 start pm2.json && /bin/bash
 # CMD ["echo", "hello"]
