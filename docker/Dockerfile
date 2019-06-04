@@ -3,8 +3,8 @@ FROM ubuntu:16.04
 
 RUN apt update
 RUN apt install wget -y
-#RUN apt install curl -y
-#RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
+# RUN apt install curl -y
+# RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
 
 # install xz
 RUN wget -O /usr/lib/xz-5.2.4.tar.gz https://nchc.dl.sourceforge.net/project/lzmautils/xz-5.2.4.tar.gz
@@ -27,4 +27,7 @@ RUN apt install git -y
 RUN cd /home && git clone https://github.com/zzp11/auto-deploy.git
 RUN cd /home/auto-deploy && npm install && npm install pm2 --global
 RUN ln -s /usr/lib/node/bin/pm2 /usr/bin
-RUN cd /home/auto-deploy && pm2 start pm2.json
+# RUN cd /home/auto-deploy && pm2 start pm2.json
+
+ENTRYPOINT ["/bin/bash", "/home/auto-deploy/start.sh"]  
+# CMD ["/bin/bash", "-c", "cd", "/home/auto-deploy", "&&", "pm2", "start", "pm2.json", "&&", "/bin/bash"]
