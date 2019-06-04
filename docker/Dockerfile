@@ -1,5 +1,6 @@
 # ubuntu 16.04 with auto-deploy
 FROM ubuntu:16.04
+MAINTAINER 1411139262@qq.com
 
 RUN apt update
 RUN apt install wget -y
@@ -29,5 +30,7 @@ RUN cd /home/auto-deploy && npm install && npm install pm2 --global
 RUN ln -s /usr/lib/node/bin/pm2 /usr/bin
 # RUN cd /home/auto-deploy && pm2 start pm2.json
 
-ENTRYPOINT ["/bin/bash", "/home/auto-deploy/start.sh"]  
-# CMD ["/bin/bash", "-c", "cd", "/home/auto-deploy", "&&", "pm2", "start", "pm2.json", "&&", "/bin/bash"]
+# ENTRYPOINT cd /home/auto-deploy && pm2 start pm2.json && pm2 log
+# ENTRYPOINT cd /home/auto-deploy && pm2 start pm2.json && tail /dev/null
+ENTRYPOINT cd /home/auto-deploy && pm2 start pm2.json && /bin/bash
+# CMD ["echo", "hello"]
